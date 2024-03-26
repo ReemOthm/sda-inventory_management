@@ -28,7 +28,7 @@ class Store
             }
             items.Add(item);
             Console.WriteLine($"Item '{item.Name}' has added successfully.");
-        
+
         }
         catch (Exception e)
         {
@@ -74,4 +74,12 @@ class Store
         return [.. items.OrderBy(i => i.Name)];
     }
 
+    public List<Item> SortByDate(SortOrder sortOrder)
+    {
+        return sortOrder switch
+        {
+            SortOrder.ASC => [.. items.OrderBy(i => i.CreatedDate)],
+            SortOrder.DESC => [.. items.OrderByDescending(i => i.CreatedDate)],
+        };
+    }
 }

@@ -58,8 +58,13 @@ class Program
         store.FindItemByName("pen");
         store.FindItemByName("Tissue ack");
 
-        Console.WriteLine("\n----------Sorted Items----------");
+        Console.WriteLine("\n----------Sorted Items Ascending----------");
         var collection = store.SortByNameAsc();
         collection.ForEach(Console.WriteLine);
+
+        Console.WriteLine("\n----------Sorted Items Descending By Date----------");
+        var collectionSortedByDate = store.SortByDate(SortOrder.DESC);
+        collectionSortedByDate.ForEach(Console.WriteLine);
+
     }
 }
