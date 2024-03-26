@@ -4,7 +4,13 @@ class Item
 {
 
     public string Name { get; }
-    private int Quantity { get; set; }
+
+    private int _quantity;
+    public int Quantity
+    {
+        get { return _quantity; }
+        set { _quantity = value;}
+    }
     private DateTime CreatedDate { get; set; }
 
     public Item(string name, int quantity, DateTime createdDate = default)
@@ -18,7 +24,8 @@ class Item
         CreatedDate = createdDate == default ? DateTime.Now : createdDate;
     }
 
-    public void DisplayItem(){
+    public void DisplayItem()
+    {
         Console.WriteLine($"Item Name: {Name}\nQuantity: {Quantity}\nCreated Date: {CreatedDate}");
     }
 

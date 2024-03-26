@@ -31,6 +31,5 @@ class Program
         Console.WriteLine(store.GetCurrentVolume());
         store.FindItemByName("soap");
         store.FindItemByName("pen");
-        // Console.WriteLine(store.FindItemByName("pen"));
     }
 }

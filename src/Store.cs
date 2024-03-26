@@ -30,7 +30,7 @@ class Store
 
     public int GetCurrentVolume()
     {
-        return items.Count;
+        return items.Sum(item => item.Quantity);
     }
 
     public void FindItemByName(string name){
