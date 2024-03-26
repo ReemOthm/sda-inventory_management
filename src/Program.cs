@@ -31,5 +31,10 @@ class Program
         Console.WriteLine(store.GetCurrentVolume());
         store.FindItemByName("soap");
         store.FindItemByName("pen");
+        store.FindItemByName("Tissue Pack");
+
+
+        var collection = store.SortByNameAsc();
+        collection.ForEach(Console.WriteLine);
     }
 }

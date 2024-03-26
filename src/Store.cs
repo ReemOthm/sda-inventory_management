@@ -2,7 +2,7 @@ namespace Inventory;
 
 class Store
 {
-    private List<Item> items = new List<Item>();
+    private List<Item> items = [];
 
     public void AddItem(Item item)
     {
@@ -33,16 +33,25 @@ class Store
         return items.Sum(item => item.Quantity);
     }
 
-    public void FindItemByName(string name){
+    public void FindItemByName(string name)
+    {
         var item = SearchItem(name);
-        if(item == null){
+        if (item == null)
+        {
             Console.WriteLine($"Item '{name}' Can Not Found!");
             return;
         }
-        item.DisplayItem();
+        Console.WriteLine(item.ToString());
     }
 
-    public Item? SearchItem(string name){
-        return items.FirstOrDefault(i => i.Name.ToLower() == name.ToLower());
+    public Item? SearchItem(string name)
+    {
+        return items.FirstOrDefault(i => i.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
     }
+
+    public List<Item> SortByNameAsc()
+    {
+        return [.. items.OrderBy(i => i.Name)];
+    }
+
 }

@@ -5,13 +5,8 @@ class Item
 
     public string Name { get; }
 
-    private int _quantity;
-    public int Quantity
-    {
-        get { return _quantity; }
-        set { _quantity = value;}
-    }
-    private DateTime CreatedDate { get; set; }
+    public int Quantity { get; set; }
+    public DateTime CreatedDate { get; set; }
 
     public Item(string name, int quantity, DateTime createdDate = default)
     {
@@ -23,10 +18,8 @@ class Item
         Quantity = quantity;
         CreatedDate = createdDate == default ? DateTime.Now : createdDate;
     }
-
-    public void DisplayItem()
+    public override string ToString()
     {
-        Console.WriteLine($"Item Name: {Name}\nQuantity: {Quantity}\nCreated Date: {CreatedDate}");
+        return $"{{Item Name: {Name} , Quantity: {Quantity} , Created Date: {CreatedDate} }}";
     }
-
 }
