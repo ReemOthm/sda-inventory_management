@@ -26,9 +26,11 @@ class Program
         store.AddItem(shampoo);
         store.AddItem(pen);
         store.AddItem(soap);
-        store.DeleteItem(soap);
-        store.DeleteItem(soap);
+        store.DeleteItem("soap");
+
         Console.WriteLine(store.GetCurrentVolume());
+        store.FindItemByName("soap");
+        store.FindItemByName("pen");
         // Console.WriteLine(store.FindItemByName("pen"));
     }
 }

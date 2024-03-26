@@ -3,7 +3,7 @@ namespace Inventory;
 class Item
 {
 
-    public readonly string name;
+    public string Name { get; }
     private int Quantity { get; set; }
     private DateTime CreatedDate { get; set; }
 
@@ -13,9 +13,13 @@ class Item
         {
             throw new Exception("Error: Quantity cannot be less than 0!");
         }
-        this.name = name;
+        Name = name;
         Quantity = quantity;
         CreatedDate = createdDate == default ? DateTime.Now : createdDate;
+    }
+
+    public void DisplayItem(){
+        Console.WriteLine($"Item Name: {Name}\nQuantity: {Quantity}\nCreated Date: {CreatedDate}");
     }
 
 }
