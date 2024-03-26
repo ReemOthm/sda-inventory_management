@@ -4,16 +4,36 @@ class Store
 {
     private List<Item> items = [];
 
+    private int _maximumCapacity;
+
+    public Store(int maximumCapacity)
+    {
+        this._maximumCapacity = maximumCapacity;
+    }
+
     public void AddItem(Item item)
     {
-        bool isItemExist = items.Any((i) => i.Name == item.Name);
-        if (isItemExist)
+        try
         {
-            Console.WriteLine($"The item '{item.Name}' is already exists!");
-            return;
+            if (GetCurrentVolume() + item.Quantity > _maximumCapacity)
+            {
+                throw new Exception("Cannot Add! Items Exceed the Store Capacity");
+            }
+
+            bool isItemExist = items.Any((i) => i.Name == item.Name);
+            if (isItemExist)
+            {
+                Console.WriteLine($"The item '{item.Name}' is already exists!");
+                return;
+            }
+            items.Add(item);
+            Console.WriteLine($"Item '{item.Name}' has added successfully.");
+        
         }
-        items.Add(item);
-        Console.WriteLine($"Item '{item.Name}' has added successfully.");
+        catch (Exception e)
+        {
+            Console.WriteLine($"{e.Message}");
+        }
     }
 
     public void DeleteItem(string name)

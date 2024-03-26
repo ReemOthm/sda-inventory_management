@@ -20,20 +20,45 @@ class Program
         var umbrella = new Item("Umbrella", 5);
         var sunscreen = new Item("Sunscreen", 8);
 
-        var store = new Store();
+        var store = new Store(300);
+
+        store.AddItem(waterBottle);
+        store.AddItem(chocolateBar);
+        store.AddItem(notebook);
         store.AddItem(pen);
         store.AddItem(tissuePack);
-        store.AddItem(shampoo);
-        store.AddItem(pen);
+        store.AddItem(chipsBag);
+        store.AddItem(sodaCan);
         store.AddItem(soap);
+        store.AddItem(shampoo);
+        store.AddItem(toothbrush);
+        store.AddItem(coffee);
+        store.AddItem(sandwich);
+        store.AddItem(batteries);
+        store.AddItem(umbrella);
+        store.AddItem(sunscreen);
+
+
+        Console.WriteLine("\n----------Add Item Again--------");
+        store.AddItem(sunscreen);
+
+        Console.WriteLine("\n----------Delete Item--------");
         store.DeleteItem("soap");
 
+        Console.WriteLine("\n----------Add Item Exceed the Capacity--------");
+        var sunscreen3 = new Item("Sunscreen 3", 50);
+        store.AddItem(sunscreen3);
+
+        Console.WriteLine("\n----------Current Volum---------");
         Console.WriteLine(store.GetCurrentVolume());
+
+
+        Console.WriteLine("\n----------Search Items----------");
         store.FindItemByName("soap");
         store.FindItemByName("pen");
-        store.FindItemByName("Tissue Pack");
+        store.FindItemByName("Tissue ack");
 
-
+        Console.WriteLine("\n----------Sorted Items----------");
         var collection = store.SortByNameAsc();
         collection.ForEach(Console.WriteLine);
     }
