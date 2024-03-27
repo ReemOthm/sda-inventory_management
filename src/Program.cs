@@ -66,5 +66,19 @@ class Program
         var collectionSortedByDate = store.SortByDate(SortOrder.DESC);
         collectionSortedByDate.ForEach(Console.WriteLine);
 
+        Console.WriteLine("\n----------Group Items By Date----------");
+        var groupByDate = store.GroupByDate();
+        foreach (var group in groupByDate)
+        {
+            Console.WriteLine($"{group.Key} Items:");
+            foreach (var item in group.Value)
+            {
+                Console.WriteLine($" - {item.Name}, Created: {item.CreatedDate.ToShortDateString()}");
+            }
+
+            Console.WriteLine();
+
+        }
+
     }
 }

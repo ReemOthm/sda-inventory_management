@@ -2,7 +2,7 @@ namespace Inventory;
 
 class Store
 {
-    private List<Item> items = [];
+    private List<Item> _items = [];
 
     private int _maximumCapacity;
 
@@ -20,13 +20,13 @@ class Store
                 throw new Exception("Cannot Add! Items Exceed the Store Capacity");
             }
 
-            bool isItemExist = items.Any((i) => i.Name == item.Name);
+            bool isItemExist = _items.Any((i) => i.Name == item.Name);
             if (isItemExist)
             {
                 Console.WriteLine($"The item '{item.Name}' is already exists!");
                 return;
             }
-            items.Add(item);
+            _items.Add(item);
             Console.WriteLine($"Item '{item.Name}' has added successfully.");
 
         }
@@ -44,13 +44,13 @@ class Store
             Console.WriteLine($"Failed to Delete! Can Not Found Item '{name}'!");
             return;
         }
-        items.Remove(item);
+        _items.Remove(item);
         Console.WriteLine($"Item '{item.Name}' has deleted successfully.");
     }
 
     public int GetCurrentVolume()
     {
-        return items.Sum(item => item.Quantity);
+        return _items.Sum(item => item.Quantity);
     }
 
     public void FindItemByName(string name)
@@ -66,20 +66,29 @@ class Store
 
     public Item? SearchItem(string name)
     {
-        return items.FirstOrDefault(i => i.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
+        return _items.FirstOrDefault(i => i.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
     }
 
     public List<Item> SortByNameAsc()
     {
-        return [.. items.OrderBy(i => i.Name)];
+        return [.. _items.OrderBy(i => i.Name)];
     }
 
     public List<Item> SortByDate(SortOrder sortOrder)
     {
         return sortOrder switch
         {
-            SortOrder.ASC => [.. items.OrderBy(i => i.CreatedDate)],
-            SortOrder.DESC => [.. items.OrderByDescending(i => i.CreatedDate)],
+            SortOrder.ASC => [.. _items.OrderBy(i => i.CreatedDate)],
+            SortOrder.DESC => [.. _items.OrderByDescending(i => i.CreatedDate)],
         };
+    }
+
+    public Dictionary<string, List<Item>> GroupByDate()
+    {
+        DateTime dateTime = DateTime.Now.AddMonths(-3);
+
+        var groupedDictionary = _items.GroupBy(i => i.CreatedDate > dateTime ? "New Arrival" : "Old").ToDictionary(g => g.Key, g => g.ToList()).OrderBy(d => d.Key);
+
+        return groupedDictionary.ToDictionary();
     }
 }
